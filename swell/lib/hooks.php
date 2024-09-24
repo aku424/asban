@@ -45,7 +45,7 @@ function hook_body_class( $classes ) {
 	}
 	if ( ! SWELL::is_show_index() ) {
 		$classes[] = '-index-off';
-	};
+	}
 
 	if ( is_singular( 'lp' ) ) {
 		$classes[] = '-sidebar-off';
@@ -193,4 +193,28 @@ function hook_get_avatar( $avatar, $id_or_email, $args ) {
 		'loading' => 'lazy',
 		// 'sizes'   => '',
 	]);
+}
+
+
+
+/**
+ * 管理者・編集者以外の投稿保存処理を調整する
+ */
+add_filter( 'safecss_filter_attr_allow_css', __NAMESPACE__ . '\hook_safecss', 10, 2 );
+function hook_safecss( $allow_css, $css_test_string ) {
+	// インラインSVG画像スタイルを全てのユーザー権限で許可する
+	if ( $css_test_string === '--the-icon-svg: url(data:image/svg+xml' ) {
+		return true;
+	}
+	if ( preg_match( '/^base64,[-a-zA-Z0-9_\/\+=]+\)/', $css_test_string ) ) {
+		$allow_css = true;
+	}
+	return $allow_css;
+}
+
+add_filter( 'wp_kses_allowed_html', __NAMESPACE__ . '\allow_aria_selected', 10, 2 );
+function allow_aria_selected( $allowedposttags, $context ) {
+	// タグブロック用に aria-selected を許可
+	$allowedposttags['button']['aria-selected'] = true;
+	return $allowedposttags;
 }

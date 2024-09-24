@@ -13,7 +13,7 @@ function hook_rest_api_init() {
 	// SWELLブロック設定の取得
 	register_rest_route( 'wp/v2', '/swell-block-settings', [
 		'methods'             => 'GET',
-		'permission_callback' => [ '\SWELL_Theme', 'is_administrator' ],
+		'permission_callback' => [ '\SWELL_Theme', 'has_edit_can' ],
 		'callback'            => function() {
 
 			$default = [
@@ -367,14 +367,14 @@ function hook_rest_api_init() {
 		'methods'             => 'GET',
 		'permission_callback' => '__return_true',
 		'callback'            => function( $request ) {
-			$args             = [];
+			$args = [];
 			if ( isset( $request['taxonomy'] ) ) {
 				$args['taxonomy'] = $request['taxonomy'];
 			}
 			if ( isset( $request['hide_empty'] ) ) {
 				$args['hide_empty'] = $request['hide_empty'];
 			}
-			$terms    = get_terms( $args );
+			$terms = get_terms( $args );
 			if ( is_wp_error( $terms ) ) {
 				wp_die( json_encode( [] ) );
 			}
@@ -410,7 +410,7 @@ function ct_up_btn_data( $cv_data, $btnid, $ct_name ) {
 	}
 
 	return $cv_data;
-};
+}
 
 
 /**
@@ -418,7 +418,7 @@ function ct_up_btn_data( $cv_data, $btnid, $ct_name ) {
  */
 function ct_up_ad_data( $ad_id, $meta_key ) {
 	$count = (int) get_post_meta( $ad_id, $meta_key, true );
-	$count++;
+	++$count;
 	update_post_meta( $ad_id, $meta_key, $count );
 
 	return [
@@ -426,4 +426,4 @@ function ct_up_ad_data( $ad_id, $meta_key ) {
 		'meta' => $meta_key,
 		'ct'   => $count,
 	];
-};
+}

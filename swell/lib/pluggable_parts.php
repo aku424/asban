@@ -338,3 +338,18 @@ if ( ! function_exists( 'swl_parts__pickup_banner' ) ) :
 	<?php
 	}
 endif;
+
+
+/**
+ * PR表記
+ */
+if ( ! function_exists( 'swl_parts__pr_notation' ) ) :
+	function swl_parts__pr_notation( $args ) {
+		?>
+			<div data-nosnippet class="c-prNotation is-style-bg_stripe" data-style="big">
+				<i class="icon-info"></i>
+				<span><?=wp_kses( SWELL::get_setting( 'pr_notation_l_text' ), SWELL::$allowed_text_html )?></span>
+			</div>
+		<?php
+	}
+endif;

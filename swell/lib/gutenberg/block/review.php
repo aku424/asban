@@ -47,7 +47,7 @@ function swl_render_review_box( $attrs ) {
 
 		$img_class = '__img';
 		if ( $img_id ) {
-			$img_class .= " wp-image-${img_id}";
+			$img_class .= " wp-image-{$img_id}";
 		}
 
 		$img_props = 'class="' . $img_class . '" src="' . $img_url . '" alt=""';

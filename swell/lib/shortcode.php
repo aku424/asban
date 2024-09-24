@@ -127,7 +127,16 @@ if ( ! function_exists( __NAMESPACE__ . '\blog_parts' ) ) :
 
 		$content = \SWELL_Theme::get_blog_parts_content( $args );
 
+		$edit_link = '';
+		// if ( current_user_can( 'edit_others_posts' ) ) {
+		// 	$edit_url  = admin_url( '/post.php?post=' . $parts_id . '&action=edit' );
+		// 	$edit_link = '<a href="' . $edit_url . '" class="p-blogParts__edit" target="_blank" rel="noopener nofollow">' .
+		// 		'<i class="icon-pen" role="presentation"></i>' .
+		// 		'このブログパーツを編集</a>';
+		// }
+
 		return '<div class="p-blogParts post_content' . esc_attr( $bp_class ) . '" data-partsID="' . esc_attr( $parts_id ) . '">' .
+			$edit_link .
 			\SWELL_Theme::do_blog_parts( $content ) .
 		'</div>';
 	}
@@ -614,3 +623,14 @@ function do_html_sc( $atts, $content = null ) {
 	return $content;
 }
 if ( ! shortcode_exists( 'html' ) ) add_shortcode( 'html', __NAMESPACE__ . '\do_html_sc' );
+
+
+/**
+ * PR表記
+ */
+if ( ! function_exists( __NAMESPACE__ . '\echo_pr_notation' ) ) :
+	function echo_pr_notation( $atts ) {
+		return SWELL::get_pluggable_parts( 'pr_notation' );
+	}
+endif;
+add_shortcode( 'pr_notation', __NAMESPACE__ . '\echo_pr_notation' );

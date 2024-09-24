@@ -10,7 +10,6 @@ trait Default_Settings {
 			'remove_wpver'           => '1',
 			'remove_wpver'           => '1',
 			'remove_rel_link'        => '1',
-			'remove_wlwmanifest'     => '1',
 			'remove_rsd_link'        => '1',
 			'remove_emoji'           => '1',
 			'remove_rest_link'       => '',
@@ -475,6 +474,11 @@ trait Default_Settings {
 			'page_link_style'         => 'normal',
 			'show_page_link_thumb'    => false,
 			'pn_link_is_same_term'    => false,
+			'show_pr_notation'        => 'off',
+			'show_pr_notation_page'   => 'off',
+			'pr_notation_type'        => 's',
+			'pr_notation_s_text'      => '広告',
+			'pr_notation_l_text'      => __( '当ページのリンクには広告が含まれています。', 'swell' ),
 
 			// 投稿パーツ
 			'h2_type'                 => 'band',

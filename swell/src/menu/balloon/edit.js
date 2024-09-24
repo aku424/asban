@@ -235,6 +235,7 @@ export default function BalloonEdit({ id, setId }) {
 								<Button
 									disabled={isWaiting}
 									isDestructive
+									variant='secondary'
 									// icon={close}
 									// iconSize={16}
 									onClick={deleteBalloon}
@@ -276,6 +277,7 @@ export default function BalloonEdit({ id, setId }) {
 											<Button
 												className='swell_settings_balloon_edit__iconDelete'
 												isDestructive
+												variant='secondary'
 												icon={close}
 												iconSize={12}
 												label={__('アイコン画像を削除', 'swell')}

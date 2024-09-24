@@ -24,11 +24,16 @@ function render_faq( $block_content, $block ) {
 	if ( ! $is_matched ) return $block_content;
 
 	// 続いて、A の中身を取得していく（divの入れ子の可能性があるため、正規表現では難しい）
-	$answers       = [];
-	$block_content = mb_convert_encoding( $block_content, 'HTML-ENTITIES', 'auto' );
-	$dom           = new \DOMDocument();
+	$answers = [];
+
+	// mb_convert_encodingで'HTML-ENTITIES'は非推奨になった
+	// $encoded_block_content = mb_convert_encoding( $block_content, 'HTML-ENTITIES', 'auto' );
+
+	$encoded_block_content = mb_encode_numericentity( $block_content, [0x80, 0x10FFFF, 0, 0x1FFFFF], 'UTF-8' );
+
+	$dom = new \DOMDocument();
 	libxml_use_internal_errors( true );
-	$dom->loadHTML( $block_content );
+	$dom->loadHTML( $encoded_block_content );
 	libxml_clear_errors();
 	$xpath = new \DOMXpath( $dom );
 
@@ -46,7 +51,14 @@ function render_faq( $block_content, $block ) {
 			do_shortcode( $A_content ),
 			'<h1><h2><h3><h4><h5><h6><br><ol><ul><li><a><p><div><b><strong><em>' // <i>は除外
 		);
-		$A_content = str_replace( "\n", '', $A_content );
+
+		// 改行・タブを削除
+		$A_content = preg_replace( '/[\r\n\t]/', '', $A_content );
+
+		// class属性を削除
+		$A_content = preg_replace( '/ class="[^"]*"/', '', $A_content );
+
+		// $A_content = preg_replace( '/ +/', ' ', $A_content ); // 連続スペースを一つに
 		$answers[] = $A_content;
 	}
 

@@ -96,3 +96,28 @@ function render_core_group_in_widget( $block_content, $block ) {
 	$block_content = preg_replace( '/<h2>(.*?)<\/h2>/i', '<div class="' . $title_class . '">$1</div>', $block_content );
 	return $block_content;
 }
+
+/**
+ * 6.4~ 画像のlightboxを無効化
+ */
+function custom_wp_theme_json_default( $theme_json ) {
+	$new_data = [
+		'version'  => 2,
+		'settings' => [
+			// 本来はこっちで一括オフにできるはずだが、6.4 RC3 時点 では効かないバグあり
+			'lightbox' => [
+				'allowEditing' => false,
+			],
+			//6.4 RC3 時点 ではこっちでオフにできる
+			'blocks' => [
+				'core/image' => [
+					'lightbox' => [
+						'allowEditing' => false,
+					],
+				],
+			],
+		],
+	];
+	return $theme_json->update_with( $new_data );
+}
+add_filter( 'wp_theme_json_data_default', __NAMESPACE__ . '\custom_wp_theme_json_default' );

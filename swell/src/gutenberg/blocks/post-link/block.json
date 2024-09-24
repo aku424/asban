@@ -5,6 +5,7 @@
 	"category": "swell-blocks",
 	"keywords": [
 		"swell",
+		"related",
 		"blogcard"
 	],
 	"supports": {
@@ -73,6 +74,13 @@
 		"postTitle": {
 			"type": "string",
 			"default": ""
+		},
+		"thumbUrl": {
+			"type": "string"
+		},
+		"thumbID": {
+			"type": "number",
+			"default": 0
 		}
 	},
 	"textdomain": "swell"

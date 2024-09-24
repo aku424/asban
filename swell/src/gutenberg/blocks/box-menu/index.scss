@@ -27,7 +27,11 @@
 	.swell-block-box-menu__inner > .block-list-appender {
 		flex-basis: calc(100% - var(--the-gap));
 		margin: 0 0 0 var(--the-gap);
+	}
 
+	.components-placeholder__label > svg {
+		width: 24px;
+		height: 24px;
 	}
 }
 

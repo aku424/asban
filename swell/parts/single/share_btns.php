@@ -30,7 +30,7 @@ $share_btns = [
 	],
 	'twitter' => [
 		'check_key'   => 'show_share_btn_tw',
-		'title'       => __( 'Twitterでシェア', 'swell' ),
+		'title'       => __( 'X(Twitter)でシェア', 'swell' ),
 		'href'        => 'https://twitter.com/intent/tweet?',
 		'window_size' => 'height=400,width=600',
 		'querys'      => [
@@ -85,6 +85,11 @@ if ( 'out' === $urlcopy_pos ) $share_btns_class .= ' has-big-copybtn';
 		<?php
 			if ( ! $SETTEING[ $data['check_key'] ] ) continue;
 
+			// twitter → X
+
+			if ( 'twitter' === $key && apply_filters( 'swell_twitter_to_x', 1 ) ) {
+				$key = 'twitter-x';
+			}
 			if ( 'pinterest' === $key ) {
 				SWELL_Theme::set_use( 'pinterest', true );
 			}
@@ -93,7 +98,7 @@ if ( 'out' === $urlcopy_pos ) $share_btns_class .= ' has-big-copybtn';
 				$querys = $data['querys'];
 
 				// Twitterだけ追加設定あり
-				if ( 'twitter' === $key ) :
+				if ( 'twitter' === $key || 'twitter-x' === $key ) :
 					if ( $hashtags ) $querys['hashtags'] = $hashtags;
 					if ( $via ) $querys['via']           = $via;
 				endif;
@@ -109,7 +114,7 @@ if ( 'out' === $urlcopy_pos ) $share_btns_class .= ' has-big-copybtn';
 			if ( isset( $data['window_size'] ) ) :
 				$window_size = $data['window_size'];
 
-				$onclick = "javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,${window_size}');return false;";
+				$onclick = "javascript:window.open(this.href, '_blank', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,{$window_size}');return false;";
 
 				$btn_attrs .= ' onclick="' . $onclick . '"';
 			endif;

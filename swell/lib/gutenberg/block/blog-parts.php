@@ -16,7 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			$bp_class .= ' ' . $attrs['className'];
 		}
 
+		$edit_link = '';
+		// if ( current_user_can( 'edit_others_posts' ) ) {
+		// 	$edit_url  = admin_url( '/post.php?post=' . $parts_id . '&action=edit' );
+		// 	$edit_link = '<a href="' . $edit_url . '" class="p-blogParts__edit" target="_blank" rel="noopener nofollow">' .
+		// 		'<i class="icon-pen" role="presentation"></i>' .
+		// 		'このブログパーツを編集</a>';
+		// }
+
 		$content = \SWELL_Theme::do_blog_parts( $content );
-		return '<div class="' . esc_attr( $bp_class ) . '" data-partsID="' . esc_attr( $parts_id ) . '">' . $content . '</div>';
+		return '<div class="' . esc_attr( $bp_class ) . '" data-partsID="' . esc_attr( $parts_id ) . '">' . $edit_link . $content . '</div>';
 	},
 ] );

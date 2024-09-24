@@ -9,6 +9,9 @@ $wp_customize->add_panel( 'swell_panel_single_page', [
 // タイトル
 require_once __DIR__ . '/single_page/post_title.php';
 
+// 広告表示
+require_once __DIR__ . '/single_page/pr_notation.php';
+
 // アイキャッチ画像
 require_once __DIR__ . '/single_page/thumbnail.php';
 

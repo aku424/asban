@@ -49,6 +49,11 @@ function hook_enqueue_block_editor_assets() {
 	// 	wp_enqueue_script( 'swell_widget_editor', T_DIRE_URI . '/build/gutenberg/widget_editor.js', [], SWELL_VERSION, true );
 	// }
 
+	// fse関連ブロックの非表示
+	if ( apply_filters( 'swell_hide_fse_blocks', true ) ) {
+		wp_enqueue_script( 'swell_hide_fse_blocks', T_DIRE_URI . '/build/gutenberg/hide_fse_blocks.js', [], SWELL_VERSION, true );
+	}
+
 	// JS用翻訳ファイルの読み込み
 	if ( function_exists( 'wp_set_script_translations' ) ) {
 		wp_set_script_translations( 'swell_blocks', 'swell', \SWELL_Theme::get_languages_dir() );

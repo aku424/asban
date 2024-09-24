@@ -110,7 +110,7 @@ class Pre_Parse_Blocks {
 			}
 		}
 
-		// ブログパーツ・再利用ブロックは展開して中身チェック
+		// ブログパーツ・同期パターンは展開して中身チェック
 		$parts_id = 0;
 		if ( 'loos/blog-parts' === $block_name ) {
 			$parts_id = $block['attrs']['partsID'] ?? 0;

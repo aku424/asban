@@ -138,6 +138,14 @@ trait Status {
 
 
 	/**
+	 * 投稿編集権限を持つかどうか
+	 */
+	public static function has_edit_can() {
+		return current_user_can( 'edit_posts' );
+	}
+
+
+	/**
 	 * ウィジェットブロック化が有効かどうか
 	 */
 	public static function use_widgets_block() {
@@ -231,7 +239,6 @@ trait Status {
 
 		$is_show_ttltop = ( 'top' === $title_pos ) ? true : false;
 		return apply_filters( 'swell_is_show_ttltop', $is_show_ttltop );
-
 	}
 
 
@@ -305,7 +312,6 @@ trait Status {
 		}
 
 		return apply_filters( 'swell_is_show_sidebar', $is_show );
-
 	}
 
 
@@ -411,5 +417,4 @@ trait Status {
 		$flag = (bool) \SWELL_Theme::get_option( 'separate_style' );
 		return apply_filters( 'swell_is_separate_css', $flag );
 	}
-
 }

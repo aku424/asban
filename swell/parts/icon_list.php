@@ -18,6 +18,7 @@ $util_class = $fz_class . ' ' . $hov_class;
 		if ( empty( $href ) ) continue;
 		if ( $key === 'home' || $key === 'home2' ) $key = 'link';
 		if ( $key !== 'search' ) :
+			if ($key === 'twitter' && apply_filters( 'swell_twitter_to_x', 1 )) $key = 'twitter-x'
 			?>
 					<li class="c-iconList__item -<?=esc_attr( $key )?>">
 						<a href="<?=esc_url( $href )?>" target="_blank" rel="noopener" class="c-iconList__link <?=esc_attr( $util_class )?>" aria-label="<?=esc_attr( $key )?>">

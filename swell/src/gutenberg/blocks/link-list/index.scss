@@ -75,9 +75,16 @@
 .swl-modal--linkList {
 	height: 100%;
 
-	.components-modal__content {
-		display: flex;
-		flex-flow: column;
+	.components-modal__header + div:not(.swl-modal--linkList__inner) {
+		height: 100%;
+	}
+
+	.swl-modal--linkList__inner {
+		display: grid;
+		grid-template-rows: auto 1fr auto;
+		grid-template-columns: auto;
+		gap: 0;
+		height: 100%;
 	}
 
 	.swl-tabPanel {
@@ -93,7 +100,7 @@
 	}
 
 	.swl-modal--linkList__search {
-		margin-bottom: 16px;
+		margin-bottom: 1em .5em;
 
 		.components-base-control__field {
 			margin: 0;
@@ -104,13 +111,13 @@
 		display: flex;
 		flex-flow: column;
 		padding: 16px;
-		overflow: hidden;
+		overflow-y: auto;
 	}
+
 
 	.swl-linkList-terms {
 		margin: 0 0 0 -8px;
 		padding: 8px;
-		overflow-y: auto;
 		list-style: none;
 
 		// 入れ子のリスト

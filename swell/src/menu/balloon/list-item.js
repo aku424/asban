@@ -118,6 +118,7 @@ export default function BalloonListItem({
 					/>
 					<Button
 						isDestructive
+						variant='secondary'
 						className='swl-setting-balloon__delete swl-setting-balloon__btn'
 						label={__('このセットを削除する', 'swell')}
 						icon={close}

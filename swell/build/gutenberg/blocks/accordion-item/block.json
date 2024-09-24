@@ -7,6 +7,7 @@
     "loos/accordion"
   ],
   "supports": {
+    "anchor": true,
     "className": false,
     "reusable": false
   },

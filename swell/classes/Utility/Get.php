@@ -3,6 +3,8 @@ namespace SWELL_Theme\Utility;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+use \SWELL_Theme as SWELL;
+
 trait Get {
 
 	/**
@@ -264,7 +266,7 @@ trait Get {
 		} else {
 			// 通常
 			$excerpt = strip_shortcodes( $post_data->post_content );
-			$excerpt = preg_replace( '/<h2.*>(.*?)<\/h2>/i', '【$1】', $excerpt );
+			// $excerpt = preg_replace( '/<h2.*>(.*?)<\/h2>/i', '【$1】', $excerpt ); // この処理が邪魔な人もいる & h2タグの中にタグがあると変になるので廃止
 			$excerpt = preg_replace( '/<rt.*>.*<\/rt>/i', '', $excerpt ); // ルビのふりがな削除
 			$excerpt = wp_strip_all_tags( $excerpt, true );
 			// $excerpt = mb_substr( $excerpt, 0, $length )." ... ";
@@ -572,6 +574,7 @@ trait Get {
 	public static function get_external_blog_card( $url, $card_args = [] ) {
 
 		$card_data = '';
+		$cache_key = '';
 
 		// キャッシュがあるか調べる
 		if ( self::is_use( 'card_cache__ex' ) ) {
@@ -603,23 +606,8 @@ trait Get {
 			$thumb_url   = $card_data['thumbnail'];
 			// $icon        = $card_data['icon'];
 
-			/**
-			 * はてなブログの文字化け対策
-			 */
-			$title_decoded = utf8_decode( $title );  // utf8でのデコード
-			if ( mb_detect_encoding( $title_decoded ) === 'UTF-8' ) {
-				$title = $title_decoded; // 文字化け解消
-
-				$description_decoded = utf8_decode( $description );
-				if ( mb_detect_encoding( $description_decoded ) === 'UTF-8' ) {
-					$description = $description_decoded;
-				}
-
-				$site_name_decoded = utf8_decode( $site_name );
-				if ( mb_detect_encoding( $site_name_decoded ) === 'UTF-8' ) {
-					$site_name = $site_name_decoded;
-				}
-			}
+			// description から連続​・改行などを削除
+			$description = preg_replace( '/[\r\n\t ]+/', ' ', $description ); // '/\s+/' でもほぼ同じ
 
 			// 文字数で切り取り
 			if ( mb_strwidth( $title, 'UTF-8' ) > 100 ) {
@@ -1410,6 +1398,33 @@ trait Get {
 		}
 
 		return apply_filters( 'swell_get_tax_of_post_type', $the_tax, $the_post_type );
+	}
+
+
+	/**
+	 * PR表記
+	 */
+	public static function get_pr_notation_size( $the_id = '', $setting_key = 'show_pr_notation' ) {
+		$show_pr_notation = SWELL::get_setting( $setting_key ) ?? 'off';
+		$pr_notation_type = SWELL::get_setting( 'pr_notation_type' ) ?? 's';
+		$meta_show_pr     = get_post_meta( $the_id, 'swell_meta_show_pr_notation', true ) ?: '';
+
+		// 投稿ごとの上書き指定
+		if ( 'hide' === $meta_show_pr ) {
+			return false;
+		}
+		if ( 'show' === $meta_show_pr ) {
+			return $pr_notation_type;
+		}
+
+		// ベース設定
+		if ( 'off' === $show_pr_notation ) {
+			return false;
+		}
+
+		if ( 'off' !== $show_pr_notation ) {
+			return $pr_notation_type;
+		}
 	}
 
 

@@ -54,7 +54,7 @@ Customizer::add( $section, 'show_share_btn_fb', [
 
 // Twitter
 Customizer::add( $section, 'show_share_btn_tw', [
-	'label' => __( 'Twitter', 'swell' ),
+	'label' => __( 'X(Twitter)', 'swell' ),
 	'type'  => 'checkbox',
 ] );
 
@@ -112,9 +112,9 @@ Customizer::add( $section, 'share_message', [
 	'type'  => 'text',
 ] );
 
-// ■ Twitter用の追加設定
+// ■ X(Twitter)用の追加設定
 Customizer::big_title( $section, 'sns_share_add_setting', [
-	'label' => __( 'Twitter用の追加設定', 'swell' ),
+	'label' => __( 'X(Twitter)用の追加設定', 'swell' ),
 ] );
 
 // シェアされた時のハッシュタグ

@@ -95,3 +95,20 @@ function render_accordion( $block_content, $block ) {
 
 	return $block_content;
 }
+
+/**
+ * 6.3で画像ブロックにstyleでw,hが指定されるようになったので、それをaspect-ratioに変換する
+ */
+add_filter( 'render_block_core/image', __NAMESPACE__ . '\fix_img_v63', 10, 2 );
+function fix_img_v63( $block_content, $block ) {
+	$attrs = $block['attrs'] ?? [];
+
+	$w = $attrs['width'] ?? '';
+	$h = $attrs['height'] ?? '';
+	if ( $w && $h ) {
+		$size_style    = "width:{$w}px;height:{$h}px";
+		$ratio         = "{$w}/{$h}";
+		$block_content = str_replace( $size_style, "aspect-ratio:{$ratio}", $block_content );
+	}
+	return $block_content;
+}

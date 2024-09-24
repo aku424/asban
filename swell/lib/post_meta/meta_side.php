@@ -143,6 +143,10 @@ function side_meta_cb( $post ) {
 						'title'   => __( 'アイキャッチ画像', 'swell' ),
 						'options' => $show_or_hide_options,
 					],
+					'swell_meta_show_pr_notation' => [
+						'title'   => __( 'PR表記', 'swell' ),
+						'options' => $show_or_hide_options,
+					],
 					'swell_meta_show_index' => [
 						'title'   => __( '目次', 'swell' ),
 						'options' => $show_or_hide_options,
@@ -233,6 +237,7 @@ function hook_save_post( $post_id ) {
 		'swell_meta_ttl_pos'            => 'str',
 		'swell_meta_show_pickbnr'       => 'str',
 		'swell_meta_show_sidebar'       => 'str',
+		'swell_meta_show_pr_notation'   => 'str',
 		'swell_meta_show_index'         => 'str',
 		'swell_meta_toc_target'         => 'str',
 		'swell_meta_show_thumb'         => 'str',

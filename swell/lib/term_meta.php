@@ -49,6 +49,7 @@ function add_term_edit_fields( $term ) {
 	$term_subttl   = get_term_meta( $the_term_id, 'swell_term_meta_subttl', 1 );
 	$term_image    = get_term_meta( $the_term_id, 'swell_term_meta_image', 1 );
 	$term_ttlbg    = get_term_meta( $the_term_id, 'swell_term_meta_ttlbg', 1 );
+	$is_show_pr    = get_term_meta( $the_term_id, 'swell_term_meta_show_pr_notation', 1 );
 	$is_show_thumb = get_term_meta( $the_term_id, 'swell_term_meta_show_thumb', 1 );
 	$is_show_desc  = get_term_meta( $the_term_id, 'swell_term_meta_show_desc', 1 );
 	$is_show_list  = get_term_meta( $the_term_id, 'swell_term_meta_show_list', 1 );
@@ -167,7 +168,16 @@ function add_term_edit_fields( $term ) {
 		</td>
 	</tr>
 	<tr class="form-field">
-		<th><?=esc_html__( '「アイキャッチ画像」をページに表示させるかどうか', 'swell' )?></th>
+		<th><?=esc_html__( '「PR表記」をページに表示するかどうか', 'swell' )?></th>
+		<td>
+			<?php
+				$checked = ( $is_show_pr === '1' ) ? ' checked' : ''; // 標準：オフ
+				Field::switch_checkbox( 'swell_term_meta_show_pr_notation', $is_show_pr, $checked );
+			?>
+		</td>
+	</tr>
+	<tr class="form-field">
+		<th><?=esc_html__( '「アイキャッチ画像」をページに表示するかどうか', 'swell' )?></th>
 		<td>
 			<?php
 				$checked = ( $is_show_thumb === '1' ) ? ' checked' : ''; // 標準：オフ
@@ -176,7 +186,7 @@ function add_term_edit_fields( $term ) {
 		</td>
 	</tr>
 	<tr class="form-field">
-		<th><?=esc_html__( '「説明」の内容をページに表示させるかどうか', 'swell' )?></th>
+		<th><?=esc_html__( '「説明」の内容をページに表示するかどうか', 'swell' )?></th>
 		<td>
 			<?php
 				$checked = ( $is_show_desc !== '0' ) ? ' checked' : ''; // 標準：オン
@@ -252,6 +262,7 @@ function save_term_filds( $term_id ) {
 		'swell_term_meta_show_nav'         => 'str',
 		'swell_term_meta_image'            => 'str',
 		'swell_term_meta_ttlbg'            => 'str',
+		'swell_term_meta_show_pr_notation' => 'switch',
 		'swell_term_meta_show_thumb'       => 'switch',
 		'swell_term_meta_show_desc'        => 'switch',
 		'swell_term_meta_show_list'        => 'switch',

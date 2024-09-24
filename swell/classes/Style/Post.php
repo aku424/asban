@@ -115,7 +115,7 @@ class Post {
 			// ブロックエディターのカラーパレット用
 			if ( is_admin() ) {
 				Style::add_root( '--color_bln_' . $key, $color['bg'] );
-				Style::add_root( "--color_bln_${key}_border", $color['border'] );
+				Style::add_root( "--color_bln_{$key}_border", $color['border'] );
 			}
 		}
 	}

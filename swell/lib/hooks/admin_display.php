@@ -1,6 +1,8 @@
 <?php
 namespace SWELL_Theme\Hooks;
 
+use \SWELL_THEME\Parts\Setting_Field as Field;
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
@@ -14,8 +16,9 @@ function add_custom_post_columns( $columns ) {
 	// 投稿タイプごとに分岐
 	if ( in_array( $post_type, ['post', 'page' ], true ) ) {
 
-		$columns['thumbnail'] = _x( 'アイキャッチ', 'table', 'swell' );
-		$columns['post_id']   = 'ID';
+		$columns['thumbnail']   = _x( 'アイキャッチ', 'table', 'swell' );
+		$columns['pr_notation'] = 'PR表記';
+		$columns['post_id']     = 'ID';
 
 	} elseif ( $post_type === 'speech_balloon' ) {
 
@@ -72,6 +75,18 @@ function output_custom_post_columns( $column_name, $post_id ) {
 		} else {
 			echo '—';  // em dash
 		}
+	} elseif ( 'pr_notation' === $column_name ) {
+
+		$show_or_hide_options = [
+			'show' => _x( '表示', 'show', 'swell' ),
+			'hide' => _x( '非表示', 'show', 'swell' ),
+		];
+
+		$val = get_post_meta( $post_id, 'swell_meta_show_pr_notation', 1 );
+		echo '<span data-meta-val=' . esc_attr( $val ) . '>' .
+				esc_html( $show_or_hide_options[ $val ] ?? '---' ) .
+			'</span>';
+
 	} elseif ( 'post_id' === $column_name ) {
 
 		echo esc_html( $post_id );
@@ -399,3 +414,73 @@ function customize_plugin_auto_update_html( $html, $plugin_file, $plugin_data ) 
  */
 // add_filter( 'theme_auto_update_setting_html', __NAMESPACE__ . '\customize_theme_auto_update_html', 10, 3 );
 // function customize_theme_auto_update_html( $html, $stylesheet, $theme ) {}
+
+
+/**
+ * クイック編集
+ */
+function quickedit_add_custom_field( $column_name, $post_type ) {
+	if ($column_name !== 'pr_notation') return;
+	$meta_key = 'swell_meta_show_pr_notation';
+
+	$show_or_hide_options = [
+		'show' => _x( '表示', 'show', 'swell' ),
+		'hide' => _x( '非表示', 'show', 'swell' ),
+	];
+	\SWELL_Theme::set_nonce_field( '_meta_pr_quick' );
+	?>
+		<div class="swl-quick-edit">
+			<label for="<?=esc_attr( $meta_key )?>" class="swl-meta__label">
+				<span class="title">PR表記</span>
+			</label>
+			<?php Field::meta_select( $meta_key, $show_or_hide_options, '' ); ?>
+		</div>
+	<?php
+}
+add_action( 'quick_edit_custom_box', __NAMESPACE__ . '\quickedit_add_custom_field', 10, 2 );
+
+
+
+/**
+ * 保存処理
+ */
+function hook_save_post_for_quick_edit( $post_id ) {
+
+	// nonce チェック
+	if ( ! \SWELL_Theme::check_nonce( '_meta_pr_quick' ) ) {
+		return;
+	}
+
+	\SWELL_Theme::save_post_metas( $post_id, [
+		'swell_meta_show_pr_notation'   => 'str',
+	] );
+}
+add_action( 'save_post', __NAMESPACE__ . '\hook_save_post_for_quick_edit' );
+
+
+function quickedit_set_custom_field_value_js() {
+	?>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			// var metaPR = $('#swell_meta_show_pr_notation');
+			// 「クイック編集」押下時に、テーブルから値を取得してセット
+			$(document).on('click', '#the-list .editinline', function() {
+
+				var closestTr = $(this).closest('tr');
+				var post_id = closestTr.attr('id');
+				post_id = post_id.replace("post-", "");
+
+				// console.log('post_id',post_id);
+
+				// Get the value
+				var metaVal = closestTr.find('td.pr_notation > span[data-meta-val]').data('meta-val');
+				// console.log('metaVal', metaVal);
+
+				// Set the value to the input
+				$('.inline-edit-wrapper select#swell_meta_show_pr_notation').val(metaVal);
+			});
+		});
+	</script>
+	<?php
+}
+add_action( 'admin_footer-edit.php', __NAMESPACE__ . '\quickedit_set_custom_field_value_js', 99 );

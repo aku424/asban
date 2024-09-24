@@ -77,5 +77,5 @@ Customizer::add( $section, 'spmenu_main_title', [
 // サブメニューをアコーディオン化する
 Customizer::sub_title( $section, 'acc_sp_submenu', [
 	'label'       => __( 'サブメニューをアコーディオン化', 'swell' ),
-	'description' => __( '「サイト全体設定」＞「基本デザイン」＞「■ サブメニューの表示形式」から、サブメニューを開閉式にすることができます。', 'swell' ),
+	'description' => __( '「サイト全体設定」→「基本デザイン」→「■ サブメニューの表示形式」から、サブメニューを開閉式にすることができます。', 'swell' ),
 ] );

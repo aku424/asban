@@ -94,7 +94,7 @@ trait Parts {
 	 * ブログパーツの出力処理
 	 */
 	public static function do_blog_parts( $content ) {
-		// do_shortcode > do_blocks の順番を逆にすると　パーツ内の再利用ブロック内のショートコードが展開されないので注意
+		// do_shortcode > do_blocks の順番を逆にすると　パーツ内の再利用ブロック（同期パターン）内のショートコードが展開されないので注意
 		$content = do_shortcode( do_blocks( $content ) );
 
 		if ( 'the_content' !== current_filter() ) {

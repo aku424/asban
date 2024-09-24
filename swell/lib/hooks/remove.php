@@ -69,10 +69,9 @@ function remove_wp_func() {
 		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 	}
 
-	// Windows Live Writeの停止
-	if ( $OPTION['remove_wlwmanifest'] ) {
-		remove_action( 'wp_head', 'wlwmanifest_link' );
-	}
+	// Windows Live Writeの停止 wp6.3 からwlwmanifest_linkが非推奨になってるので 常に削除
+	if ( 1 ) remove_action( 'wp_head', 'wlwmanifest_link' );
+
 	// EditURI(RSD Link)の停止
 	if ( $OPTION['remove_rsd_link'] ) {
 		remove_action( 'wp_head', 'rsd_link' );

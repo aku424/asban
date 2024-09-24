@@ -14,10 +14,10 @@ class Sub_Title extends \WP_Customize_Control {
 	public function render_content() {
 		$return = '';
 		if ( isset( $this->label ) ) {
-			$return .= '<span class="customize-control-title -sub">' . esc_html( $this->label ) . '</span>';
+			$return .= '<span class="customize-control-title -sub">' . $this->label . '</span>';
 		}
 		if ( isset( $this->description ) ) {
-			$return .= '<span class="description customize-control-description">' . esc_html( $this->description ) . '</span>';
+			$return .= '<span class="description customize-control-description">' . $this->description . '</span>';
 		}
 
 		echo wp_kses( $return, \SWELL_Theme::$allowed_text_html );

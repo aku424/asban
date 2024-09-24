@@ -11,8 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ] );
 
 function cb( $attrs ) {
-	$className = $attrs['className'];
-
+	$className   = $attrs['className'];
 	$style       = $attrs['style'] ?? '';
 	$cardTitle   = $attrs['cardTitle'] ?? '';
 	$cardCaption = $attrs['cardCaption'];
@@ -23,6 +22,7 @@ function cb( $attrs ) {
 	$isText      = $attrs['isText'];
 	$linkData    = $attrs['linkData'] ?? [];
 	$icon        = $attrs['icon'] ?? '';
+	$thumbUrl    = $attrs['thumbUrl'] ?? '';
 
 	//////////////
 	if ( ! empty( $linkData ) ) {
@@ -56,6 +56,10 @@ function cb( $attrs ) {
 		'style'        => $card_style,
 		'icon'         => $icon,
 	];
+
+	if ( $thumbUrl ) {
+		$card_args['thumb'] = $thumbUrl;
+	}
 
 	$block_class = 'swell-block-postLink';
 	if ( $className ) {

@@ -25,7 +25,7 @@ Customizer::sub_title( $section, 'sns_cta_check', [
 
 // Twitterフォローボタン
 Customizer::add( $section, 'show_tw_follow_btn', [
-	'label' => __( 'Twitterフォローボタン', 'swell' ),
+	'label' => __( 'X(Twitter)フォローボタン', 'swell' ),
 	'type'  => 'checkbox',
 ] );
 
@@ -44,7 +44,7 @@ Customizer::add( $section, 'show_fb_like_box', [
 // TwitterのユーザーID
 Customizer::add( $section, 'tw_follow_id', [
 	'classname'   => '-twitter-setting',
-	'label'       => __( 'TwitterのユーザーID', 'swell' ),
+	'label'       => __( 'X(Twitter)のユーザーID', 'swell' ),
 	'description' => __( '@は含めずに入力してください。', 'swell' ),
 	'type'        => 'text',
 	'sanitize'    => 'wp_filter_nohtml_kses',

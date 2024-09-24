@@ -90,6 +90,12 @@ function get_rss( $rss_url = '' ) {
 	// RSS取得
 	$rss = fetch_feed( $rss_url );
 
+	// echo '<pre style="margin-left: 100px;">';
+	// var_dump( $rss );
+	// echo '</pre>';
+
+	// return;
+
 	if ( is_wp_error( $rss ) ) {
 		return [
 			'error'   => 1,
@@ -120,8 +126,9 @@ function get_rss( $rss_url = '' ) {
 		// サムネイル
 		$thumbnail = '';
 
-		// まずはget_thumbnail() で取得
-		$thumbnail = $item->get_thumbnail() ?: '';
+		// まずは get_thumbnail() で取得
+		// $thumbnail = $item->get_thumbnail() ?: '';
+		$thumbnail = _get_thumbnail( $item ) ?: '';
 
 		// 次に enclosure から取得
 		if ( '' === $thumbnail ) {
@@ -194,4 +201,29 @@ function get_remote_thumb( $url = '' ) {
 	}
 
 	return '';
+}
+
+
+/**
+ * コアの $rss->get_thumbnail() を使うとエラーになるので修正版を用意
+ */
+function _get_thumbnail( $item ) {
+	if ( isset( $item->data['thumbnail'] ) ) {
+		return $item->data['thumbnail'];
+	}
+
+	$thumbnails = $item->get_item_tags( SIMPLEPIE_NAMESPACE_MEDIARSS, 'thumbnail' );
+	if ( ! $thumbnails ) {
+		return null;
+	}
+
+	$thumbnail = $thumbnails[0];
+
+	if ( isset( $thumbnail['data'] ) ) {
+		return $thumbnail['data'];
+	} elseif ( isset( $thumbnail['attribs'][''] ) ) {
+		return $thumbnail['attribs'][''];
+	}
+
+	return null;
 }

@@ -127,12 +127,17 @@ class Admin_Menu {
 			[__CLASS__, 'swellers_id_setting' ]
 		);
 
-		// 「再利用ブロック」を追加
+		// 「パターン」を追加
+		$reuse_block_name = \SWELL_Theme::wpver_is_above( '6.3' ) ? __( 'パターン', 'swell' ) : __( '再利用ブロック', 'swell' );
+
+		// WordPress6.6以上、かつサイト管理者の場合は新しいパターンページにリンクする
+		$pattern_page_url = \SWELL_Theme::wpver_is_above( '6.6' ) && current_user_can( 'edit_theme_options' ) ? 'site-editor.php?postType=wp_block' : 'edit.php?post_type=wp_block';
+
 		add_menu_page(
-			__( '再利用ブロック', 'swell' ),
-			__( '再利用ブロック', 'swell' ),
+			$reuse_block_name,
+			$reuse_block_name,
 			'manage_options',
-			'edit.php?post_type=wp_block',
+			$pattern_page_url,
 			'',
 			'dashicons-image-rotate',
 			81 // 「設定」 の下

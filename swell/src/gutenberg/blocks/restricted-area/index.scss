@@ -22,7 +22,7 @@
 }
 
 
-.edit-post-sidebar {
+:is(.edit-post-sidebar, .editor-sidebar) {
 
 	.swl-dash {
 		margin: 0 auto 12px;

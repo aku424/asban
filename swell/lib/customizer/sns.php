@@ -19,7 +19,7 @@ Customizer::sub_title( $section, 'sns_link', [
 
 $sns_array = [
 	'facebook'  => __( 'Facebook', 'swell' ),
-	'twitter'   => __( 'Twitter', 'swell' ),
+	'twitter'   => __( 'X(Twitter)', 'swell' ),
 	'instagram' => __( 'Instagram', 'swell' ),
 	'tiktok'    => __( 'TikTok', 'swell' ),
 	'room'      => __( '楽天ROOM', 'swell' ),

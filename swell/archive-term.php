@@ -38,6 +38,11 @@ $list_type = apply_filters( 'swell_post_list_type_on_term', $list_type, $term_id
 				SWELL_PARTS::the_term_navigation( $term_id );
 			endif;
 
+			// PR表記
+			if ( get_term_meta( $term_id, 'swell_term_meta_show_pr_notation', 1 ) ) {
+				SWELL_Theme::pluggable_parts( 'pr_notation' );
+			}
+
 			// 説明文・アイキャッチ
 			SWELL_Theme::get_parts( 'parts/archive/term_head', [
 				'term_id'     => $term_id,

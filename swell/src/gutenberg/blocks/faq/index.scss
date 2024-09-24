@@ -6,7 +6,8 @@
 }
 
 // サイドバー
-.edit-post-sidebar {
+// Memo: 6.6からクラス名が .editor-sidebar に。
+:is(.edit-post-sidebar, .editor-sidebar) {
 
 	.faq-controles {
 

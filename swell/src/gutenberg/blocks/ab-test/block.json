@@ -43,6 +43,14 @@
 	"attributes": {
 		"rate": {
 			"type": "number"
+		},
+		"syncMode": {
+			"type": "boolean",
+			"default": false
+		},
+		"syncId": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"textdomain": "swell"

@@ -94,6 +94,12 @@ class Get_OGP_InWP {
 		// Data to be finally returned
 		$ogp_data = [];
 
+		// DOMDocument::loadHTML は、文字列をISO-8859-1として扱うため UTF-8 文字が化けてしまう。それを防ぐために mb_convert_encoding() を使う。
+		// $response_body = mb_convert_encoding( $response_body, 'HTML-ENTITIES', 'UTF-8' );
+
+		// 非推奨な mb_convert_encoding の代わりに mb_encode_numericentity を使ってhtmlエンコード
+		$response_body = mb_encode_numericentity( $response_body, [0x80, 0x10FFFF, 0, 0x1FFFFF ], 'UTF-8' );
+
 		// Avoid getting a loadHTML () parsing error
 		$old_libxml_error = libxml_use_internal_errors( true );
 
@@ -101,6 +107,7 @@ class Get_OGP_InWP {
 		$doc = new DOMDocument();
 		$doc->loadHTML( $response_body );
 
+		// reset libxml_error
 		libxml_use_internal_errors( $old_libxml_error );
 
 		// Get title tag

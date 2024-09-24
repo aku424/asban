@@ -85,6 +85,7 @@ export default {
 		'LsPocket',
 		'LsTiktok',
 		'LsTwitter',
+		'LsTwitterX',
 		'LsYoutube',
 		'LsCodepen',
 		'LsGithub',

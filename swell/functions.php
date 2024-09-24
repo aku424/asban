@@ -21,7 +21,6 @@ define( 'S_DIRE', get_stylesheet_directory() );
 define( 'T_DIRE_URI', get_template_directory_uri() );
 define( 'S_DIRE_URI', get_stylesheet_directory_uri() );
 
-
 /**
  * CLASSのオートロード
  */

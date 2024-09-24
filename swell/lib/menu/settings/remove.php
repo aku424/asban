@@ -61,7 +61,6 @@ Field::add_menu_section( [
 		$remove_settings = [
 			'remove_wpver'           => __( 'WordPressのバージョン情報を出力しない', 'swell' ),
 			'remove_rel_link'        => __( '<code>rel="prev/next"</code>を出力しない', 'swell' ),
-			'remove_wlwmanifest'     => __( 'Windows Live Writeの連携停止', 'swell' ),
 			'remove_rsd_link'        => __( 'EditURI(RSD Link)を停止する', 'swell' ),
 			'remove_emoji'           => __( '絵文字用のスクリプトの読み込みをしない', 'swell' ),
 			'remove_self_pingbacks'  => __( 'セルフピンバックを停止する', 'swell' ),

@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'wp_loaded', function () {
 
 	// 遅延読み込み以外での普通の is_admin時（エディター側で走る the_content フックなど）は何もしない
-	if ( ! \SWELL_Theme::is_rest() && is_admin() ) return;
+	if ( ! SWELL::is_rest() && is_admin() ) return;
 
 	// 再利用ブロックでも埋め込みを有効化する
 	global $wp_embed;
@@ -42,7 +42,7 @@ add_action( 'wp_loaded', function () {
 	add_filter( 'widget_block_content', __NAMESPACE__ . '\add_toc_on_widget', 12 );
 
 	// 空のpタグ除去
-	if ( ! \SWELL_Theme::get_option( 'remove_delete_empp' ) ) {
+	if ( ! SWELL::get_option( 'remove_delete_empp' ) ) {
 		add_filter( 'the_content', __NAMESPACE__ . '\remove_empty_p', 12 );
 		add_filter( 'widget_text', __NAMESPACE__ . '\remove_empty_p', 12 );
 		add_filter( 'widget_text_content', __NAMESPACE__ . '\remove_empty_p', 12 );
