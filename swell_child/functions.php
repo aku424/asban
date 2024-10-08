@@ -18,6 +18,9 @@ add_action('wp_enqueue_scripts', function() {
 	$timestamp = date( 'Ymdgis', filemtime( get_stylesheet_directory() . '/style.css' ) );
 	wp_enqueue_style( 'child_style', get_stylesheet_directory_uri() .'/style.css', [], $timestamp );
 
+	$timestamp = date('Ymdgis', filemtime(get_stylesheet_directory() . '/gajumala.js'));
+    wp_enqueue_script('gajumala', get_stylesheet_directory_uri() . '/gajumala.js', array('jquery'), $timestamp, true);
+
 	/* その他の読み込みファイルはこの下に記述 */
 
 }, 11);

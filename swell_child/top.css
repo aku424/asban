@@ -368,3 +368,83 @@
 .u-serviceImportant .swell-block-step__item::before {
     display: none;
 }
+
+
+/*************************
+制作実績一覧のタイトル
+***************************/
+#body_wrap.archive  #top_title_area {
+    align-items: center;
+    display: flex;
+    margin: 0;
+    min-height: 11em;
+    overflow: hidden;
+    padding: 1.5em 0;
+    position: relative;
+    width: 100%;
+}
+
+#body_wrap.archive  .l-topTitleArea__body.l-container {
+    color: #fff;
+    position: relative;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .1);
+    width: 100%;
+    z-index: 3;
+}
+
+@media (min-width: 600px) {
+    #body_wrap.archive  #top_title_area {
+        min-height: 240px;
+        padding: 1em 0;
+    }
+}
+
+
+/*************************
+お問い合わせフォーム
+***************************/
+.u-contact {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.u-contact__inputArea > p {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+}
+
+.u-contact__inputArea label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.u-contact__inputArea label > span:first-child {
+    font-weight: bold;
+    color: var(--local-main-color);
+}
+
+.u-contact__inputArea label > span:last-child > input,
+.u-contact__inputArea label > span:last-child > textarea {
+    width: 100%;
+    background-color: transparent;
+    border-radius: 8px;
+    border: 1px solid #000;
+    padding: 8px 12px;
+}
+
+.u-contact__checkArea >  p {
+    display: flex;
+    width: fit-content;
+    margin-inline: auto;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.u-contact__buttonArea > p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
