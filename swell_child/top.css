@@ -727,6 +727,45 @@ h2.wp-block-heading > small {
     font-weight: bold;
 }
 
+.u-contact__checkArea > p .wpcf7-list-item {
+    margin-left: 0;
+}
+
+/* ラベル */
+.u-contact__checkArea > p .wpcf7-list-item > label {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+
+/* チェックボックス */
+.u-contact__checkArea > p .wpcf7-list-item > label > input[type="checkbox"] {
+    /* 初期化 */
+    -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+    position: relative;
+    border-radius: 4px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--local-main-color);
+    background-color: #fff;
+    padding: 0;
+}
+
+.u-contact__checkArea > p .wpcf7-list-item > label > input[type="checkbox"]:checked:before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    rotate: -45deg;
+    width: 12px;
+    height: 8px;
+    border-left: 2px solid var(--local-main-color);
+    border-bottom: 2px solid var(--local-main-color);
+}
+
 .u-contact__buttonArea > p {
     display: flex;
     justify-content: center;
