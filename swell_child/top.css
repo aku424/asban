@@ -134,6 +134,28 @@ h2.wp-block-heading > small {
     opacity: .7;
 }
 
+.swell-block-fullWide:has(.p-postListWrap) .p-postList__body {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 16px;
+}
+
+.swell-block-fullWide:has(.p-postListWrap) .p-postList__body > .p-postList__meta {
+    font-size: .8em;
+    align-items: start;
+}
+
+.swell-block-fullWide:has(.p-postListWrap) .p-postList__body .icon-posted::before {
+    display: none;
+}
+
+/* お知らせ PC */
+@media (min-width: 960px) {
+    .swell-block-fullWide:has(.p-postListWrap) .p-postList__body {
+        grid-template-columns: auto 1fr;
+    }
+}
+
 /* 私たちについて */
 .u-topAbout {
     max-width: 550px;
