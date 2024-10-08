@@ -1,8 +1,8 @@
 :root {
     --local-main-color: #427f05;
-    --local-main-bg: #e4edde;
+    --local-main-bg: #eff2eb;
     --local-boxshadow: 0 0 10px rgba(0, 0, 0, 0.16);
-    --local-boxshadow-buttonhover: 0 4px 12px rgba(0,0,0,.1),0 12px 24px -12px rgba(0,0,0,.2);
+	--local-boxshadow-buttonhover: 0 4px 12px rgba(0,0,0,.1),0 12px 24px -12px rgba(0,0,0,.2);
     --local-button-padding: 12px 24px;
     --local-button-min-width: 40%;
 }
@@ -14,9 +14,126 @@
     }
 }
 
+/*************************
+ヘッダー
+***************************/
+/* ヘッダー追従 */
+.l-header {
+	position: sticky;
+}
+
+/* ハンバーガーメニュ-のタイトル*/
+.p-spMenu__body > .c-widget__title.-spmenu {
+    display: none;
+}
+
+/* お問い合わせページ */
+.page.page-id-42 .w-pageBottom {
+	display: none;
+}
+
+/* 固定ページ タイトル */
+.l-topTitleArea.c-filterLayer.-texture-dot:after {
+	background-color: var(--color_htag);
+	background-image: unset;
+	opacity: 1;
+}
+
+.l-topTitleArea .c-pageTitle {
+	font-size: 2.8rem;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+}
+
+/* フッター上メニュー */
+@media (min-width: 960px) {
+	.w-footer.-col2 {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+	}
+}
+
+
+/* フッターのSNS */
+.widget_swell_sns_links .c-iconList {
+	justify-content: flex-start;
+	column-gap: 4px;
+}
+
+/* フッター サイトマップ */
+.l-container.w-footer p.has-text-align-left {
+	padding-bottom: 8px;
+	border-bottom: 1px solid #427f05;
+}
+
+.l-container.w-footer .swell-block-linkList__link {
+	display: inline-flex;
+}
+
+.l-container.w-footer .p-blogParts .wp-block-columns{
+	--the-gap: .75em;
+	row-gap: var(--the-gap) !important;
+}
+
+/*************************
+カスタムブロックのデザイン調整
+***************************/
+/* h2タイトル*/
+h2.wp-block-heading.is-style-section_ttl {
+	padding-bottom: 8px !important;
+}
+
+h2.wp-block-heading.is-style-section_ttl:after {
+	content: "" !important;
+	position: absolute;
+	width: 60px;
+	height: 2px;
+	background-color: #427f05;
+	left: 50%;
+	bottom: 0;
+	transform: translate(-50%, -50%);
+}
+
+h2.wp-block-heading > small {
+	font-size: .4em !important;
+}
+
 /* 
  * TOPページ
  */
+/* お知らせ */
+.top > #content.l-content.l-container {
+    padding-top: 0;
+}
+
+.swell-block-fullWide:has(.p-postListWrap) {
+    background-color: var(--local-main-color);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+.swell-block-fullWide:has(.p-postListWrap) .swell-block-fullWide__inner p {
+    margin: 0 !important;
+}
+
+.swell-block-fullWide:has(.p-postListWrap) .p-postList,
+.swell-block-fullWide:has(.p-postListWrap) .p-postList__link {
+    color: #fff;
+    border: none;
+}
+.swell-block-fullWide:has(.p-postListWrap) .p-postList,
+.swell-block-fullWide:has(.p-postListWrap) .p-postList__link {
+    color: #fff;
+    border: none;
+    transition: opacity .2s;
+}
+.swell-block-fullWide:has(.p-postListWrap) .p-postList__link:hover {
+    background-color: var(--local-main-color);
+    opacity: .7;
+}
+
 /* 私たちについて */
 .u-topAbout {
     max-width: 550px;
@@ -110,10 +227,6 @@
 }
 
 /* サービス */
-.swell-block-fullWide.alignfull .u-topService {
-	background-color: var(--local-main-bg);
-}
-
 .u-topService {
     display: grid;
     grid-template-columns: 1fr;
@@ -165,6 +278,65 @@
     .u-topAbout__circleText {
         font-size: 2em;
     }
+
+    .u-topService__link:hover {
+        box-shadow: none;
+    }
+}
+
+
+/* サービス */
+.swell-block-fullWide.alignfull:has(.u-topService) {
+	background-color: var(--local-main-bg);
+}
+
+.u-topService {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    list-style: none;
+    padding-left: 0;
+    width: 100%;
+}
+
+.u-topService__item {
+    height: 100%;
+    text-align: center;
+} 
+
+.u-topService__link {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 24px;
+    text-decoration: none;
+    transition: box-shadow .2s;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    color: #333;
+    height: 100%;
+}
+
+.u-topService__title {
+    color: #427f05;
+    font-size: 1.125em;
+}
+
+.u-topService__media {
+    height: 80px;
+}
+
+.u-topService__image {
+    height: 100%;
+}
+
+/* PC用 */
+@media (min-width: 960px) {
+	.u-topService {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	}
 
     .u-topService__link:hover {
         box-shadow: none;
@@ -231,7 +403,7 @@
 
 .u-topFeature__title {
     color: var(--local-main-color);
-    font-size: 1.5em;
+    font-size: 1.7em;
 }
 
 @media (min-width: 960px) {
@@ -247,6 +419,100 @@
     .u-topFeature__layout::after {
         grid-column: 2 / 3;
         grid-row: 1 / 2;
+    }
+}
+
+/* 
+ * サービスTOP
+ */
+.u-service-layout {
+    display: grid;
+    row-gap: 16px;
+    grid-template-columns: 1fr;
+}
+
+.u-service-layout > .wp-block-media-text__media,
+.u-service-layout > .wp-block-media-text__content {
+    grid-column: 1 / 2;
+}
+
+.u-service-layout > .wp-block-media-text__media {
+    grid-row: 1 / 2;
+}
+
+.u-service-layout > .wp-block-media-text__content {
+    grid-row: 2 / 3;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+    padding: 32px !important;
+}
+
+@media (min-width: 960px) {
+    .u-service-layout {
+        grid-template-rows: 203px 1fr auto;
+        grid-template-columns: 43.3333333333% 130px auto;
+        gap: 0;
+        row-gap: 0;
+        margin-bottom: 48px;
+    }
+
+    .u-service-layout > .wp-block-media-text__media {
+        grid-row: 1 / 3;
+        grid-column: 1 / 3;
+    }
+    
+    .u-service-layout > .wp-block-media-text__content {
+        grid-row: 2 / 4;
+        grid-column: 2 / 4;
+    }
+}
+
+
+/* 
+ * サービス詳細
+ *
+/* こんな悩みないですか？ */
+.u-service-layout {
+    display: grid;
+    row-gap: 16px;
+    grid-template-columns: 1fr;
+}
+
+.u-service-layout > .wp-block-media-text__media,
+.u-service-layout > .wp-block-media-text__content {
+    grid-column: 1 / 2;
+}
+
+.u-service-layout > .wp-block-media-text__media {
+    grid-row: 1 / 2;
+}
+
+.u-service-layout > .wp-block-media-text__content {
+    grid-row: 2 / 3;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+    padding: 32px !important;
+}
+
+@media (min-width: 960px) {
+    .u-service-layout {
+        grid-template-rows: 203px 1fr auto;
+        grid-template-columns: 43.3333333333% 230px auto;
+        gap: 0;
+        margin-bottom: 48px;
+        row-gap: 0;
+    }
+
+    .u-service-layout > .wp-block-media-text__media {
+        grid-row: 1 / 3;
+        grid-column: 1 / 3;
+    }
+    
+    .u-service-layout > .wp-block-media-text__content {
+        grid-row: 2 / 4;
+        grid-column: 2 / 4;
     }
 }
 
@@ -296,12 +562,10 @@
     }
 }
 
-
 /* 
  * サービス詳細
  *
 /* こんな悩みないですか？ */
-
 .u-serviceWorry {
     --wp-column-gap: 64px;
     display: grid;
@@ -369,12 +633,11 @@
     display: none;
 }
 
-
 /*************************
 制作実績一覧のタイトル
 ***************************/
 #body_wrap.archive  #top_title_area {
-    align-items: center;
+		align-items: center;
     display: flex;
     margin: 0;
     min-height: 11em;
@@ -398,7 +661,6 @@
         padding: 1em 0;
     }
 }
-
 
 /*************************
 お問い合わせフォーム
