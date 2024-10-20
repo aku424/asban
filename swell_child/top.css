@@ -1,5 +1,6 @@
 :root {
     --local-main-color: #427f05;
+    --local-accent-color: #ff7400;
     --local-main-bg: #eff2eb;
     --local-boxshadow: 0 0 10px rgba(0, 0, 0, 0.16);
 	--local-boxshadow-buttonhover: 0 4px 12px rgba(0,0,0,.1),0 12px 24px -12px rgba(0,0,0,.2);
@@ -27,9 +28,72 @@
     display: none;
 }
 
-/* お問い合わせページ */
-.page.page-id-42 .w-pageBottom {
-	display: none;
+/* ヘッダーメニューの見た目 PC */
+@media (min-width: 960px) {
+    .c-gnavWrap {
+        display: flex;
+        align-items: center;
+    }
+
+    .c-gnav {
+        column-gap: 16px;
+    }
+
+    .c-gnav >.menu-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .c-gnav > .menu-item > a:after {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        top: 10px;
+        left: 50%;
+        transition: transform .2s;
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    .c-gnav >.menu-item:hover > a::after,
+    .c-gnav > .menu-item > a[aria-current="page"]::after,
+    .c-gnav > .menu-item:has(a[aria-current="page"]) > a::after {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ヘッダーのお問い合わせボタン */
+@media (min-width: 960px) {
+    .c-gnav > .menu-item:last-of-type a {
+        height: 100%;
+        background-color: var(--local-accent-color);
+        color: #fff;
+        font-weight: bold;
+        padding: 12px 16px;
+        transition: opacity .2s;
+    }
+
+    .c-gnav > .menu-item:last-of-type a::after {
+        display: none;
+    }
+
+    .c-gnav > .menu-item:last-of-type:hover a {
+        opacity: .7;
+    }
+}
+
+/*************************
+MV
+***************************/
+.p-mainVisual__slideTitle {
+    color: #fff;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+@media (min-width: 600px) {
+    .p-mainVisual__slideTitle {
+        font-size: 3em;
+    }
 }
 
 /* 固定ページ タイトル */
@@ -200,10 +264,14 @@ h2.wp-block-heading > small {
     z-index: 1;
 }
 
+.u-topAbout__circleMedia {
+    width: 80%;
+}
+
 .u-topAbout__circleText {
     text-align: center;
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.4em;
     width: 100%;
     color: var(--local-main-color);
 }
@@ -687,6 +755,11 @@ h2.wp-block-heading > small {
 /*************************
 お問い合わせフォーム
 ***************************/
+
+.page.page-id-42 .w-pageBottom,
+.page.page-id-606 .w-pageBottom {
+	display: none;
+}
 .u-contact {
     display: grid;
     grid-template-columns: 1fr;

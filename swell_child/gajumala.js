@@ -8,15 +8,39 @@ function setArchiveTitle() {
     targetEl.insertAdjacentHTML('afterend', setTitleEl);
 }
 
-
 (() => {
-    const archivePage = document.querySelector('#body_wrap.archive');
+    const archivePage = document.querySelector('#body_wrap.post-type-archive');
 
     if(!archivePage) {
         return;
     }
 
     setArchiveTitle();
+})();
+
+/**
+ * お問い合わせが入った後のサンクスページへのリダイレクト
+ */
+(() => {
+    document.addEventListener('wpcf7mailsent', () => {
+        location.href = '/thanks/';
+    }); 
+})();
+
+/**
+ * サンクスページに直接アクセスした場合のTOPページへのリダイレクト
+ */
+(() => {
+    const thanksPageUrl = '/thanks/';
+    const currentUrl = window.location.pathname;
+
+    if(thanksPageUrl !== currentUrl) {
+        return;
+    }
+
+    if(!document.referrer) {
+        location.href = '/';
+    }
 })();
 
 
